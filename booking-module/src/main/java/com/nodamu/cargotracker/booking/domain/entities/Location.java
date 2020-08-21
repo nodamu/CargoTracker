@@ -1,18 +1,16 @@
 package com.nodamu.cargotracker.booking.domain.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
+import lombok.*;
 
 /**
  * @author profnick
- * 8/20/20
+ * 8/21/20
  **/
 
-@AllArgsConstructor
+@ToString
 @Setter
 @Getter
+@AllArgsConstructor
 public class Location {
-    private String unLocCode;
+     private String unLocCode;
 }

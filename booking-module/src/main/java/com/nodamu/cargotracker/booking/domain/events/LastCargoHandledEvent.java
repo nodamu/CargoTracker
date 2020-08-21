@@ -7,11 +7,11 @@ import lombok.Setter;
 
 /**
  * @author profnick
- * 8/20/20
+ * 8/21/20
  **/
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class LastCargoHandledEvent {
@@ -19,7 +19,7 @@ public class LastCargoHandledEvent {
     private String handlingEventType;
     private String handlingEventVoyage;
     private String handlingEventLocation;
-    // Null object pattern.
+
     public static final LastCargoHandledEvent EMPTY = new LastCargoHandledEvent();
 
 

@@ -1,28 +1,25 @@
 package com.nodamu.cargotracker.booking.domain.valueobjects;
 
 import com.nodamu.cargotracker.booking.domain.entities.Location;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 
 /**
  * @author profnick
- * 8/20/20
+ * 8/21/20
  **/
-
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 public class Leg {
-    private Long id;
-    private Voyage voyage;
+    private Voyage voyageNumber;
     private Location loadLocation;
-    private Location unloadLocation;
-    private Date loadtime;
-    private Date unloadTime;
-
-    public Leg(Voyage voyage, Location loadLocation, Location unloadLocation, Date loadtime, Date unloadTime) {
-        this.voyage = voyage;
-        this.loadLocation = loadLocation;
-        this.unloadLocation = unloadLocation;
-        this.loadtime = loadtime;
-        this.unloadTime = unloadTime;
-    }
-
+    private Location unLoadLocation;
+    private Date LoadTimeDate;
+    private Date unLoadTimeDate;
 }
