@@ -42,6 +42,32 @@ public class Delivery {
     }
 
     /**
+     * Creates a new delivery snapshot to reflect changes in routing, i.e. when
+     * the route specification or the itinerary has changed but no additional
+     * handling of the cargo has been performed.
+     */
+    public Delivery updateOnRouting(RouteSpecification routeSpecification,
+                                    CargoItinerary itinerary) {
+
+
+        return new Delivery(routeSpecification, itinerary, this.lastCargoHandledEvent);
+    }
+
+
+    /**
+     *
+     * @param routeSpecification
+     * @param itinerary
+     * @param lastCargoHandledEvent
+     * @return
+     */
+    public static Delivery derivedFrom(RouteSpecification routeSpecification,
+                                       CargoItinerary itinerary, LastCargoHandledEvent lastCargoHandledEvent) {
+
+        return new Delivery(routeSpecification, itinerary, lastCargoHandledEvent);
+    }
+
+    /**
      * Method for calculating routing status of a Cargo
      * @param itinerary
      * @param routeSpecification
