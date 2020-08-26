@@ -22,7 +22,7 @@ public class Delivery {
 
     @Getter private RoutingStatus routingStatus;
     @Getter private TransportStatus transportStatus;
-    @Getter @Setter private Location lastKnownLocatiion;
+    @Getter @Setter private Location lastKnownLocation;
     @Getter private Voyage currentVoyage;
     @Setter private LastCargoHandledEvent lastCargoHandledEvent;
 
@@ -35,7 +35,7 @@ public class Delivery {
     public Delivery(RouteSpecification routeSpecification, CargoItinerary itinerary, LastCargoHandledEvent lastCargoHandledEvent) {
         this.routingStatus = calculateRoutingStatus(itinerary, routeSpecification);
         this.transportStatus = calculateTransportStatus();
-        this.lastKnownLocatiion = calculateLastKnownLocation();
+        this.lastKnownLocation = calculateLastKnownLocation();
         this.currentVoyage = calculateCurrentVoyage();
         this.lastCargoHandledEvent = lastCargoHandledEvent;
 //        this.nextExpectedActivity = nextExpectedActivity;
@@ -55,7 +55,7 @@ public class Delivery {
 
 
     /**
-     *
+     * Static factory method for Delivery object creation
      * @param routeSpecification
      * @param itinerary
      * @param lastCargoHandledEvent
