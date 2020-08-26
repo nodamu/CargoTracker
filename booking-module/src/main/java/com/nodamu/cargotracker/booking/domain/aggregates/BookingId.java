@@ -12,5 +12,4 @@ import lombok.Getter;
 @Getter
 public class BookingId {
     private String bookingId;
-
 }

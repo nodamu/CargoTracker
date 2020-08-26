@@ -11,7 +11,6 @@ import java.util.List;
  **/
 public interface CargoRepository {
     Cargo findByBookingId(BookingId id);
-    void  saveCargoBooking(Cargo cargo);
     List<BookingId> findAllBookingIds();
     List<Cargo> findAll();
 }

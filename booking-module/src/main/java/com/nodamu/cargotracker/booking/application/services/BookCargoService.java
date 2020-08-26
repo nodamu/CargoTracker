@@ -27,15 +27,16 @@ public class BookCargoService implements BookCargoUseCase {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-//    private CargoRepository cargoRepository;
+    private CargoRepository cargoRepository;
 
     /**
      * TODO - Create JPA Implementaton of Cargo repository
      * @param cargoRepository
      */
-//    public BookCargoService(CargoRepository cargoRepository) {
-//        this.cargoRepository = cargoRepository;
-//    }
+
+    public BookCargoService(CargoRepository cargoRepository) {
+        this.cargoRepository = cargoRepository;
+    }
 
     @Override
     public BookingId bookCargo(BookCargoCommand command) {
@@ -55,6 +56,7 @@ public class BookCargoService implements BookCargoUseCase {
         /**
          * TODO - Add repository methods for saving cargo booking to database
          */
+//            cargoRepository.save()findAll
         return new BookingId(random);
     }
 

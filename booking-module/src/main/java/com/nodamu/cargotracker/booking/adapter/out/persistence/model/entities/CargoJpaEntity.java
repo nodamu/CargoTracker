@@ -37,4 +37,36 @@ public class CargoJpaEntity {
     private DeliveryJpa delivery;
 
     protected CargoJpaEntity() { }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BookingIdJpa getBookingId() {
+        return bookingId;
+    }
+
+    public BookingAmountJpa getBookingAmount() {
+        return bookingAmount;
+    }
+
+    public LocationJpa getOrigin() {
+        return origin;
+    }
+
+    public RouteSpecificationJpa getRouteSpecification() {
+        return routeSpecification;
+    }
+
+    public void setBookingAmount(BookingAmountJpa bookingAmount) {
+        this.bookingAmount = bookingAmount;
+    }
+
+    public void setOrigin(LocationJpa origin) {
+        this.origin = origin;
+    }
 }
