@@ -1,6 +1,7 @@
 package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 import com.nodamu.cargotracker.booking.domain.events.LastCargoHandledEvent;
+import com.nodamu.cargotracker.booking.domain.valueobjects.Delivery;
 import com.nodamu.cargotracker.booking.domain.valueobjects.RoutingStatus;
 import com.nodamu.cargotracker.booking.domain.valueobjects.TransportStatus;
 
@@ -41,20 +42,22 @@ public class DeliveryJpa {
     //Predictions for the Cargo activity. Helps the operator in determining if anything needs to be changed for the future
     public static final CargoHandlingActivityJpa NO_ACTIVITY = new CargoHandlingActivityJpa();
 
+
     @Embedded
     private CargoHandlingActivityJpa nextExpectedActivity;
 
-    public DeliveryJpa(RoutingStatus routingStatus, TransportStatus transportStatus, LocationJpa lastKnownLocation, VoyageJpa currentVoyage, LastCargoHandledEvent lastEvent) {
+    public DeliveryJpa(RoutingStatus routingStatus, TransportStatus transportStatus, LocationJpa lastKnownLocation, LastCargoHandledEvent lastEvent) {
         this.routingStatus = routingStatus;
         this.transportStatus = transportStatus;
         this.lastKnownLocation = lastKnownLocation;
-        this.currentVoyage = currentVoyage;
+        this.currentVoyage = new VoyageJpa("GY78656");
         this.lastEvent = lastEvent;
 //        this.nextExpectedActivity = nextExpectedActivity;
     }
 
     public DeliveryJpa() {
     }
+
 
     public RoutingStatus getRoutingStatus() {
         return routingStatus;

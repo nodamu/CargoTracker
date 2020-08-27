@@ -24,7 +24,7 @@ public class Delivery {
     @Getter private TransportStatus transportStatus;
     @Getter @Setter private Location lastKnownLocation;
     @Getter private Voyage currentVoyage;
-    @Setter private LastCargoHandledEvent lastCargoHandledEvent;
+    @Setter @Getter private LastCargoHandledEvent lastCargoHandledEvent;
 
     //Predictions for the Cargo activity.
     // Helps the operator in determining if anything needs to be changed for the future
@@ -33,11 +33,11 @@ public class Delivery {
     private CargoHandlingActivity nextExpectedActivity;
 
     public Delivery(RouteSpecification routeSpecification, CargoItinerary itinerary, LastCargoHandledEvent lastCargoHandledEvent) {
+        this.lastCargoHandledEvent = lastCargoHandledEvent;
         this.routingStatus = calculateRoutingStatus(itinerary, routeSpecification);
         this.transportStatus = calculateTransportStatus();
         this.lastKnownLocation = calculateLastKnownLocation();
         this.currentVoyage = calculateCurrentVoyage();
-        this.lastCargoHandledEvent = lastCargoHandledEvent;
 //        this.nextExpectedActivity = nextExpectedActivity;
     }
 
@@ -89,7 +89,7 @@ public class Delivery {
      */
     private TransportStatus calculateTransportStatus(){
         System.out.println("Transport Status for last event"+lastCargoHandledEvent.getHandlingEventType());
-        if (lastCargoHandledEvent.getHandlingEventType() == null) {
+        if (lastCargoHandledEvent.getHandlingEventType() == null  ) {
             return TransportStatus.NOT_RECEIVED;
         }
 

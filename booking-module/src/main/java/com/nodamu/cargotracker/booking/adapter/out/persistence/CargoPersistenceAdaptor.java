@@ -25,6 +25,11 @@ public class CargoPersistenceAdaptor implements CargoRepository {
 
     private final CargoJpaRepository cargoJpaRepository;
 
+    /**
+     * Find cargo booking by Booking ID
+     * @param id
+     * @return
+     */
     @Override
     public Cargo findByBookingId(BookingId id) {
         Optional<CargoJpaEntity> cargo = Optional.of(cargoJpaRepository.findByBookingIdJpa(CargoMapper.toJpaEntity(id)));
@@ -36,7 +41,10 @@ public class CargoPersistenceAdaptor implements CargoRepository {
         }
     }
 
-
+    /**
+     * Find all booked cargo Id's
+     * @return
+     */
     @Override
     public List<BookingId> findAllBookingIds() {
         List<BookingIdJpa> bookingIds = cargoJpaRepository.findAllBookingIdJpa();
@@ -49,6 +57,10 @@ public class CargoPersistenceAdaptor implements CargoRepository {
         return bookingIdsEntity;
     }
 
+    /**
+     * Find all booked Cargo's
+     * @return
+     */
     @Override
     public List<Cargo> findAll() {
         List<CargoJpaEntity> cargosJpa = cargoJpaRepository.findAll();
@@ -58,4 +70,15 @@ public class CargoPersistenceAdaptor implements CargoRepository {
                 .collect(Collectors.toList());
 
     }
+
+    /**
+     * Implementation of cargo booking method as defined in repository interface
+     * @param cargo - Cargo domain entity
+     */
+    @Override
+    public void saveBooking(Cargo cargo) {
+        cargoJpaRepository.save(CargoMapper.toCargoJpaEntity(cargo));
+    }
+
+
 }

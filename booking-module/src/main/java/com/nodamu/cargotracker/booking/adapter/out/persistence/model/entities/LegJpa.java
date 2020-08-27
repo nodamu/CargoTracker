@@ -15,6 +15,7 @@ import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Entity
+@Table(name = "Leg")
 public class LegJpa {
     private static final long serialVersionUID = 1L;
 

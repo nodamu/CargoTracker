@@ -1,6 +1,14 @@
 package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 
+import com.nodamu.cargotracker.booking.domain.aggregates.BookingId;
+import com.nodamu.cargotracker.booking.domain.entities.Location;
+import com.nodamu.cargotracker.booking.domain.events.LastCargoHandledEvent;
+import com.nodamu.cargotracker.booking.domain.valueobjects.BookingAmount;
+import com.nodamu.cargotracker.booking.domain.valueobjects.CargoItinerary;
+import com.nodamu.cargotracker.booking.domain.valueobjects.Delivery;
+import com.nodamu.cargotracker.booking.domain.valueobjects.RouteSpecification;
+
 import javax.persistence.*;
 
 /**
@@ -40,6 +48,15 @@ public class CargoJpaEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public CargoJpaEntity(BookingIdJpa bookingId, BookingAmountJpa bookingAmount, RouteSpecificationJpa routeSpecification, DeliveryJpa delivery) {
+        this.bookingId = bookingId;
+        this.bookingAmount = bookingAmount;
+        this.routeSpecification = routeSpecification;
+        this.origin = routeSpecification.getOrigin();
+        this.itinerary = CargoItineraryJpa.EMPTY_ITINERARY;
+        this.delivery = delivery;
     }
 
     public Long getId() {

@@ -22,17 +22,16 @@ public class Cargo {
     @Getter @Setter private Location origin;
     @Getter private RouteSpecification routeSpecification;
     @Getter private CargoItinerary itinerary;
-    private Delivery delivery;
+    @Getter private Delivery delivery;
 
     public Cargo(BookingId id,
                  BookingAmount bookingAmount,
-                 Location origin,
                  RouteSpecification routeSpecification
                  ) {
         this.id = id;
         this.bookingAmount = bookingAmount;
-        this.origin = origin;
         this.routeSpecification = routeSpecification;
+        this.origin = routeSpecification.getOrigin();
         this.itinerary = CargoItinerary.EMPTY_ITINERARY;
         this.delivery = Delivery.derivedFrom(this.routeSpecification,this.itinerary,LastCargoHandledEvent.EMPTY);
     }

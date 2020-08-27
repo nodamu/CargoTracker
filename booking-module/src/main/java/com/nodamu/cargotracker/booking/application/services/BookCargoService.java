@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.invoke.MethodHandles;
 import java.util.UUID;
@@ -23,6 +24,7 @@ import java.util.UUID;
  **/
 
 @Service
+@Transactional
 public class BookCargoService implements BookCargoUseCase {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -30,7 +32,7 @@ public class BookCargoService implements BookCargoUseCase {
     private CargoRepository cargoRepository;
 
     /**
-     * TODO - Create JPA Implementaton of Cargo repository
+     *
      * @param cargoRepository
      */
 
@@ -46,17 +48,17 @@ public class BookCargoService implements BookCargoUseCase {
         Cargo cargo = new Cargo(
                 new BookingId(command.getBookingId()),
                 new BookingAmount(command.getBookingAmount()),
-                new Location(command.getOriginLocation()),
                 new RouteSpecification(
                         new Location(command.getOriginLocation()),
                         new Location(command.getDestLocation()),
                         command.getDestArrivalDeadline()
                 )
+
         );
-        /**
-         * TODO - Add repository methods for saving cargo booking to database
-         */
-//            cargoRepository.save()findAll
+
+//        Save booking to database
+        cargoRepository.saveBooking(cargo);
+
         return new BookingId(random);
     }
 
