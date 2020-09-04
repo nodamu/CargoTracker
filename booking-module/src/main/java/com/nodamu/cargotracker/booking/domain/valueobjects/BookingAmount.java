@@ -15,5 +15,5 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class BookingAmount {
-    private BigDecimal bookingAmount;
+    private Integer bookingAmount;
 }

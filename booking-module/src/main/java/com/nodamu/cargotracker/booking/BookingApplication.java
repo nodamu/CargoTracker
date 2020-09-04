@@ -22,32 +22,31 @@ import java.util.List;
 @SpringBootApplication
 @EntityScan(basePackages = {"com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities"})  // scan JPA entities
 @EnableJpaRepositories
-public class BookingApplication implements CommandLineRunner {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class BookingApplication  {
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private CargoRepository cargoRepository;
-
-    @Autowired
-    private BookCargoService service;
+//    @Autowired
+//    private CargoRepository cargoRepository;
+//
+//    @Autowired
+//    private BookCargoService service;
 
     public static void main(String[] args) {
         SpringApplication.run(BookingApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+//    @Override
+//    public void run(String... args) throws Exception {
 //        BookCargoCommand command = new BookCargoCommand(
-//            "456789",
-//            new BigDecimal("300"),
+//            456,
 //            "GN4563",
 //            "GN67862",
 //            new Date(2020,10,6)
 //        );
-
+//
 //        BookingId id = service.bookCargo(command);
-        List<Cargo> cargos = cargoRepository.findAll();
-//        logger.info("{} ->", id);
+////        List<Cargo> cargos = cargoRepository.findAll();
+//        logger.info("{} ->", id.getBookingId());
 
-    }
+//    }
 }

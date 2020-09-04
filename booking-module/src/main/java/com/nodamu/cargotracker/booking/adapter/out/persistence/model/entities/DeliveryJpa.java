@@ -1,11 +1,12 @@
 package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 import com.nodamu.cargotracker.booking.domain.events.LastCargoHandledEvent;
-import com.nodamu.cargotracker.booking.domain.valueobjects.Delivery;
 import com.nodamu.cargotracker.booking.domain.valueobjects.RoutingStatus;
 import com.nodamu.cargotracker.booking.domain.valueobjects.TransportStatus;
 
 import javax.persistence.*;
+
+import java.util.Date;
 
 /**
  * @author profnick
@@ -18,7 +19,7 @@ public class DeliveryJpa {
      * TODO
      */
 
-//    public static final Date ETA_UNKOWN = null;
+    public static final Date ETA_UNKNOWN = null;
 
     //Enumerated Types - Routing Status / Transport Status of the Cargo
     @Enumerated(EnumType.STRING)
@@ -29,7 +30,7 @@ public class DeliveryJpa {
     @Column(name = "transport_status")
     private TransportStatus transportStatus; //Transport Status of the Cargo
 
-    //Current/PRevious information of the Cargo. Helps the operator in determining the current state is OK.
+    //Current/Previous information of the Cargo. Helps the operator in determining the current state is OK.
     @Column(name = "last_known_location_id")
     private LocationJpa lastKnownLocation;
 
@@ -46,18 +47,34 @@ public class DeliveryJpa {
     @Embedded
     private CargoHandlingActivityJpa nextExpectedActivity;
 
-    public DeliveryJpa(RoutingStatus routingStatus, TransportStatus transportStatus, LocationJpa lastKnownLocation, LastCargoHandledEvent lastEvent) {
-        this.routingStatus = routingStatus;
-        this.transportStatus = transportStatus;
-        this.lastKnownLocation = lastKnownLocation;
-        this.currentVoyage = new VoyageJpa("GY78656");
-        this.lastEvent = lastEvent;
-//        this.nextExpectedActivity = nextExpectedActivity;
-    }
+
 
     public DeliveryJpa() {
     }
 
+    public DeliveryJpa(RoutingStatus routingStatus, TransportStatus transportStatus, LocationJpa lastKnownLocation, VoyageJpa currentVoyage, LastCargoHandledEvent lastEvent) {
+        this.routingStatus = routingStatus;
+        this.transportStatus = transportStatus;
+        this.lastKnownLocation = lastKnownLocation;
+        this.currentVoyage = currentVoyage;
+        this.lastEvent = lastEvent;
+//        this.nextExpectedActivity = nextExpectedActivity;
+    }
+
+
+    public DeliveryJpa(RoutingStatus routingStatus, TransportStatus transportStatus, LocationJpa lastKnownLocation, LastCargoHandledEvent lastEvent) {
+        this.routingStatus = routingStatus;
+        this.transportStatus = transportStatus;
+        this.lastKnownLocation = lastKnownLocation;
+        this.lastEvent = lastEvent;
+//        this.nextExpectedActivity = nextExpectedActivity;
+    }
+
+
+    //Static factory method
+    public static DeliveryJpa deriveFrom(RoutingStatus routingStatus, TransportStatus transportStatus, LocationJpa lastKnownLocation, LastCargoHandledEvent lastEvent){
+        return new DeliveryJpa(routingStatus,transportStatus,lastKnownLocation,lastEvent);
+    }
 
     public RoutingStatus getRoutingStatus() {
         return routingStatus;
@@ -98,8 +115,6 @@ public class DeliveryJpa {
     public void setLastEvent(LastCargoHandledEvent lastEvent) {
         this.lastEvent = lastEvent;
     }
-
-
 
 
 }

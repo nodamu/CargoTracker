@@ -2,13 +2,14 @@ package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * @author profnick
  * 8/25/20
  **/
 @Embeddable
-public class BookingIdJpa {
+public class BookingIdJpa implements Serializable {
 
     @Column(name = "booking_id")
     private String id;
@@ -17,7 +18,7 @@ public class BookingIdJpa {
         this.id = id;
     }
 
-    protected BookingIdJpa() {
+    public BookingIdJpa() {
     }
 
     public String getId() {

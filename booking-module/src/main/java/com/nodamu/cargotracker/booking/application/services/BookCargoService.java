@@ -24,7 +24,6 @@ import java.util.UUID;
  **/
 
 @Service
-@Transactional
 public class BookCargoService implements BookCargoUseCase {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -44,7 +43,8 @@ public class BookCargoService implements BookCargoUseCase {
     public BookingId bookCargo(BookCargoCommand command) {
         String random = UUID.randomUUID().toString().toUpperCase();
         logger.info("Booking Id -> {} creating",random);
-        command.setBookingId(random.substring(0, random.indexOf("-")));
+//        command.setBookingId(random.substring(0, random.indexOf("-")));
+        command.setBookingId(random);
         Cargo cargo = new Cargo(
                 new BookingId(command.getBookingId()),
                 new BookingAmount(command.getBookingAmount()),

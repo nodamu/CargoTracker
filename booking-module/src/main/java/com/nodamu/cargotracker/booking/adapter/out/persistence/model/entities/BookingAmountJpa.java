@@ -11,20 +11,20 @@ import java.math.BigDecimal;
 @Embeddable
 public class BookingAmountJpa {
     @Column(name = "booking_amount", unique = true, updatable = false)
-    private BigDecimal bookingAmount;
+    private Integer bookingAmount;
 
     public BookingAmountJpa() {
     }
 
-    public BookingAmountJpa(BigDecimal bookingAmount) {
+    public BookingAmountJpa(Integer bookingAmount) {
             this.bookingAmount = bookingAmount;
     }
 
-    public BigDecimal getBookingAmount() {
+    public Integer getBookingAmount() {
         return bookingAmount;
     }
 
-    public void setBookingAmount(BigDecimal bookingAmount) {
+    public void setBookingAmount(Integer bookingAmount) {
         this.bookingAmount = bookingAmount;
     }
 }

@@ -41,11 +41,10 @@ public class CargoMapper {
                        new LocationJpa(cargo.getRouteSpecification().getDestination().getUnLocCode()),
                        cargo.getRouteSpecification().getArrivalDeadline()
                ),
-               new DeliveryJpa(
-                       cargo.getDelivery().getRoutingStatus(),
+               DeliveryJpa.deriveFrom(cargo.getDelivery().getRoutingStatus(),
                        cargo.getDelivery().getTransportStatus(),
                        new LocationJpa(cargo.getDelivery().getLastKnownLocation().getUnLocCode()),
-                        cargo.getDelivery().getLastCargoHandledEvent()
+                       cargo.getDelivery().getLastCargoHandledEvent()
                )
 
        );

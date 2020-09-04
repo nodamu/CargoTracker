@@ -9,6 +9,7 @@ import com.nodamu.cargotracker.booking.domain.valueobjects.RouteSpecification;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 /**
  * @author profnick
@@ -16,7 +17,7 @@ import lombok.Setter;
  **/
 
 
-public class Cargo {
+public class Cargo extends AbstractAggregateRoot<Cargo> {
     @Getter private BookingId id;
     @Getter @Setter private BookingAmount bookingAmount;
     @Getter @Setter private Location origin;
@@ -34,6 +35,8 @@ public class Cargo {
         this.origin = routeSpecification.getOrigin();
         this.itinerary = CargoItinerary.EMPTY_ITINERARY;
         this.delivery = Delivery.derivedFrom(this.routeSpecification,this.itinerary,LastCargoHandledEvent.EMPTY);
+
+
     }
 
     /**
@@ -42,6 +45,14 @@ public class Cargo {
      */
     public void deriveDeliveryProgress(LastCargoHandledEvent lastCargoHandledEvent){
         this.delivery = Delivery.derivedFrom(getRouteSpecification(), getItinerary(),lastCargoHandledEvent);
+    }
+
+    /**
+     * Method to register the event
+     * @param event
+     */
+    public void addDomainEvent(Object event){
+        registerEvent(event);
     }
 
 

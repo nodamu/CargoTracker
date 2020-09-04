@@ -8,6 +8,7 @@ import com.nodamu.cargotracker.booking.domain.valueobjects.BookingAmount;
 import com.nodamu.cargotracker.booking.domain.valueobjects.CargoItinerary;
 import com.nodamu.cargotracker.booking.domain.valueobjects.Delivery;
 import com.nodamu.cargotracker.booking.domain.valueobjects.RouteSpecification;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 
@@ -58,6 +59,7 @@ public class CargoJpaEntity {
         this.itinerary = CargoItineraryJpa.EMPTY_ITINERARY;
         this.delivery = delivery;
     }
+
 
     public Long getId() {
         return id;

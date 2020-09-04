@@ -14,7 +14,6 @@ import javax.persistence.Transient;
  **/
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Embeddable
@@ -33,5 +32,6 @@ public class LastCargoHandledEvent {
 
     public static final LastCargoHandledEvent EMPTY = new LastCargoHandledEvent();
 
-
+    protected LastCargoHandledEvent() {
+    }
 }

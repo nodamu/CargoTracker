@@ -15,9 +15,6 @@ import java.util.List;
 @Embeddable
 public class CargoItineraryJpa {
 
-    /**
-     * TODO - Add JPA annotations to class
-     */
     public static final CargoItineraryJpa EMPTY_ITINERARY = new CargoItineraryJpa();
 
     @OneToMany(cascade = CascadeType.ALL)
