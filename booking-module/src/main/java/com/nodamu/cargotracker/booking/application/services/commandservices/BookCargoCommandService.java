@@ -1,4 +1,4 @@
-package com.nodamu.cargotracker.booking.application.services;
+package com.nodamu.cargotracker.booking.application.services.commandservices;
 
 import com.nodamu.cargotracker.booking.application.ports.in.BookCargoUseCase;
 import com.nodamu.cargotracker.booking.application.ports.out.CargoRepository;
@@ -24,7 +24,7 @@ import java.util.UUID;
  **/
 
 @Service
-public class BookCargoService implements BookCargoUseCase {
+public class BookCargoCommandService implements BookCargoUseCase {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -35,16 +35,18 @@ public class BookCargoService implements BookCargoUseCase {
      * @param cargoRepository
      */
 
-    public BookCargoService(CargoRepository cargoRepository) {
+    public BookCargoCommandService(CargoRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
     }
 
     @Override
+    @Transactional
     public BookingId bookCargo(BookCargoCommand command) {
         String random = UUID.randomUUID().toString().toUpperCase();
-        logger.info("Booking Id -> {} creating",random);
-//        command.setBookingId(random.substring(0, random.indexOf("-")));
-        command.setBookingId(random);
+        String normalized = random.substring(0, random.indexOf("-"));
+        logger.info("Booking Id creating -> {} ",normalized);
+        command.setBookingId(normalized);
+//        command.setBookingId(random);
         Cargo cargo = new Cargo(
                 new BookingId(command.getBookingId()),
                 new BookingAmount(command.getBookingAmount()),
@@ -56,10 +58,10 @@ public class BookCargoService implements BookCargoUseCase {
 
         );
 
-//        Save booking to database
+        // Save booking to database
         cargoRepository.saveBooking(cargo);
 
-        return new BookingId(random);
+        return new BookingId(normalized);
     }
 
 

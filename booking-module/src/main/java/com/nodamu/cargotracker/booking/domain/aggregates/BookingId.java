@@ -2,6 +2,9 @@ package com.nodamu.cargotracker.booking.domain.aggregates;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author profnick
@@ -9,7 +12,8 @@ import lombok.Getter;
  **/
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class BookingId {
+public class BookingId implements Serializable {
     private String bookingId;
 }

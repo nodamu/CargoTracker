@@ -88,7 +88,7 @@ public class Delivery {
      * @return
      */
     private TransportStatus calculateTransportStatus(){
-        System.out.println("Transport Status for last event"+lastCargoHandledEvent.getHandlingEventType());
+//        System.out.println("Transport Status for last event"+lastCargoHandledEvent.getHandlingEventType());
         if (lastCargoHandledEvent.getHandlingEventType() == null  ) {
             return TransportStatus.NOT_RECEIVED;
         }

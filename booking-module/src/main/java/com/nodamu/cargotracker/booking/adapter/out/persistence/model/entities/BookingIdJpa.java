@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Embeddable
 public class BookingIdJpa implements Serializable {
 
-    @Column(name = "booking_id")
+    @Column(name = "booking_id",length = 500)
     private String id;
 
     public BookingIdJpa(String id) {

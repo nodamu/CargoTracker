@@ -15,9 +15,6 @@ import java.util.Date;
 
 @Embeddable
 public class DeliveryJpa {
-    /**
-     * TODO
-     */
 
     public static final Date ETA_UNKNOWN = null;
 

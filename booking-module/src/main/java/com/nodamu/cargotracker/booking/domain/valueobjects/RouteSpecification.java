@@ -15,7 +15,6 @@ import java.util.Date;
  * Route specification of the Cargo
  */
 @Getter
-@Setter
 public class RouteSpecification {
     private Location origin;
     private Location destination;
@@ -28,8 +27,8 @@ public class RouteSpecification {
      * @param arrivalDeadline
      */
     public RouteSpecification(Location origin, Location destination, Date arrivalDeadline) {
-        this.setOrigin(origin);
-        this.setDestination(destination);
-        this.setArrivalDeadline((Date) arrivalDeadline.clone());
+        this.origin = origin;
+        this.destination = destination;
+        this.arrivalDeadline = (Date) arrivalDeadline.clone();
     }
 }

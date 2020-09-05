@@ -1,14 +1,7 @@
 package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 
-import com.nodamu.cargotracker.booking.domain.aggregates.BookingId;
-import com.nodamu.cargotracker.booking.domain.entities.Location;
-import com.nodamu.cargotracker.booking.domain.events.LastCargoHandledEvent;
-import com.nodamu.cargotracker.booking.domain.valueobjects.BookingAmount;
-import com.nodamu.cargotracker.booking.domain.valueobjects.CargoItinerary;
-import com.nodamu.cargotracker.booking.domain.valueobjects.Delivery;
-import com.nodamu.cargotracker.booking.domain.valueobjects.RouteSpecification;
-import org.springframework.data.domain.AbstractAggregateRoot;
+
 
 import javax.persistence.*;
 
@@ -20,9 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Cargo")
 public class CargoJpaEntity {
-    /**
-     * TODO
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

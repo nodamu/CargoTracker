@@ -6,6 +6,8 @@ import com.nodamu.cargotracker.booking.domain.valueobjects.BookingAmount;
 import com.nodamu.cargotracker.booking.domain.valueobjects.CargoItinerary;
 import com.nodamu.cargotracker.booking.domain.valueobjects.Delivery;
 import com.nodamu.cargotracker.booking.domain.valueobjects.RouteSpecification;
+import com.nodamu.cargotracker.shareddomain.events.CargoBookedEvent;
+import com.nodamu.cargotracker.shareddomain.events.CargoBookedEventData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +38,8 @@ public class Cargo extends AbstractAggregateRoot<Cargo> {
         this.itinerary = CargoItinerary.EMPTY_ITINERARY;
         this.delivery = Delivery.derivedFrom(this.routeSpecification,this.itinerary,LastCargoHandledEvent.EMPTY);
 
+        // Cargo booked domain event
+        addDomainEvent(new CargoBookedEvent(new CargoBookedEventData(id.getBookingId())));
 
     }
 

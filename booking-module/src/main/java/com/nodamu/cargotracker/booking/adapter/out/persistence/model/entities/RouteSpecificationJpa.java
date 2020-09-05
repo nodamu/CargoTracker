@@ -12,6 +12,8 @@ import java.util.Date;
 
 @Embeddable
 public class RouteSpecificationJpa {
+    private static final long serialVersionUID = 1L;
+
     @Embedded
     @AttributeOverride(name = "unLocCode", column = @Column(name = "spec_origin_id"))
     private LocationJpa origin;
@@ -29,32 +31,21 @@ public class RouteSpecificationJpa {
     }
 
     public RouteSpecificationJpa(LocationJpa origin, LocationJpa destination, Date arrivalDeadline) {
-        this.setOrigin(origin);
-        this.setDestination(destination);
-        this.setArrivalDeadline((Date) arrivalDeadline.clone());
+        this.origin = origin;
+        this.destination = destination;
+        this.arrivalDeadline = (Date) arrivalDeadline.clone();
     }
+
 
     public LocationJpa getOrigin() {
         return origin;
-    }
-
-    public void setOrigin(LocationJpa origin) {
-        this.origin = origin;
     }
 
     public LocationJpa getDestination() {
         return destination;
     }
 
-    public void setDestination(LocationJpa destination) {
-        this.destination = destination;
-    }
-
     public Date getArrivalDeadline() {
         return arrivalDeadline;
-    }
-
-    public void setArrivalDeadline(Date arrivalDeadline) {
-        this.arrivalDeadline = arrivalDeadline;
     }
 }

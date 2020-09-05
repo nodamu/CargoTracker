@@ -16,10 +16,10 @@ import com.nodamu.cargotracker.booking.domain.valueobjects.Voyage;
 public class CargoMapper {
 
    public static Cargo mapToDomainEntity(CargoJpaEntity cargo){
-        return  new Cargo(
+        return new Cargo(
                new BookingId(cargo.getBookingId().getId()) ,
                new BookingAmount(cargo.getBookingAmount().getBookingAmount()) ,
-                new RouteSpecification(
+               new RouteSpecification(
                         new Location(cargo.getRouteSpecification().getOrigin().getUnLocCode()),
                         new Location(cargo.getRouteSpecification().getDestination().getUnLocCode()),
                         cargo.getRouteSpecification().getArrivalDeadline()
@@ -34,7 +34,7 @@ public class CargoMapper {
 
     public static CargoJpaEntity toCargoJpaEntity(Cargo cargo){
        return new CargoJpaEntity(
-               new BookingIdJpa(cargo.getId().toString()),
+               new BookingIdJpa(cargo.getId().getBookingId()),
                new BookingAmountJpa(cargo.getBookingAmount().getBookingAmount()),
                new RouteSpecificationJpa(
                        new LocationJpa(cargo.getRouteSpecification().getOrigin().getUnLocCode()),
