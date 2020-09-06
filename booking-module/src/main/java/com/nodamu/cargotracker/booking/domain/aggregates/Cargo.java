@@ -19,7 +19,7 @@ import org.springframework.data.domain.AbstractAggregateRoot;
  **/
 
 
-public class Cargo extends AbstractAggregateRoot<Cargo> {
+public class Cargo  {
     @Getter private BookingId id;
     @Getter @Setter private BookingAmount bookingAmount;
     @Getter @Setter private Location origin;
@@ -39,7 +39,7 @@ public class Cargo extends AbstractAggregateRoot<Cargo> {
         this.delivery = Delivery.derivedFrom(this.routeSpecification,this.itinerary,LastCargoHandledEvent.EMPTY);
 
         // Cargo booked domain event
-        addDomainEvent(new CargoBookedEvent(new CargoBookedEventData(id.getBookingId())));
+//        addDomainEvent(new CargoBookedEvent(new CargoBookedEventData(id.getBookingId())));
 
     }
 
@@ -55,9 +55,9 @@ public class Cargo extends AbstractAggregateRoot<Cargo> {
      * Method to register the event
      * @param event
      */
-    public void addDomainEvent(Object event){
-        registerEvent(event);
-    }
+//    public void addDomainEvent(Object event){
+//        registerEvent(event);
+//    }
 
 
 }

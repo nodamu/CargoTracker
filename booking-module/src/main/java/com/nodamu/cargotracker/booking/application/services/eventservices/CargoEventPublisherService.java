@@ -2,10 +2,12 @@ package com.nodamu.cargotracker.booking.application.services.eventservices;
 
 import com.nodamu.cargotracker.booking.adapter.out.messagebrokers.CargoEventSource;
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEvent;
+import com.nodamu.cargotracker.shareddomain.events.CargoBookedEventData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -31,9 +33,15 @@ public class CargoEventPublisherService {
         this.cargoEventSource = cargoEventSource;
     }
 
+    /**
+     * TODO - Figure out why encapsulation causing deserialization errors
+     * @param cargoBookedEventData
+     */
     @TransactionalEventListener
-    public void handleCargoBookedEvent(CargoBookedEvent cargoBookedEvent){
-        logger.info("Publishing booked cargo event with ID -> {}", cargoBookedEvent.getEventData().getBookingId());
-        cargoEventSource.cargoBooking().send(MessageBuilder.withPayload(cargoBookedEvent).build());
+    public void handleCargoBookedEvent(CargoBookedEventData cargoBookedEventData){
+        Message<CargoBookedEventData> message = MessageBuilder.withPayload(cargoBookedEventData).build();
+       boolean result = cargoEventSource.cargoBooking().send(message);
+        logger.info("Publishing booked cargo event with ID -> {}, with result {}", cargoBookedEventData.getBookingId(),result);
+
     }
 }

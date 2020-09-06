@@ -3,6 +3,10 @@ package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 
 
+import com.nodamu.cargotracker.shareddomain.events.CargoBookedEvent;
+import com.nodamu.cargotracker.shareddomain.events.CargoBookedEventData;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.*;
 
 /**
@@ -12,7 +16,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Cargo")
-public class CargoJpaEntity {
+public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +53,9 @@ public class CargoJpaEntity {
         this.origin = routeSpecification.getOrigin();
         this.itinerary = CargoItineraryJpa.EMPTY_ITINERARY;
         this.delivery = delivery;
+
+        addDomainEvent(new CargoBookedEventData(bookingId.getId()));
+
     }
 
 
@@ -78,5 +85,9 @@ public class CargoJpaEntity {
 
     public void setOrigin(LocationJpa origin) {
         this.origin = origin;
+    }
+
+    public void addDomainEvent(Object event){
+        registerEvent(event);
     }
 }

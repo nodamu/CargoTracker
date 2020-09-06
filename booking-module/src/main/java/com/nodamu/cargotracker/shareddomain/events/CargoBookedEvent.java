@@ -11,6 +11,9 @@ package com.nodamu.cargotracker.shareddomain.events;
 public class CargoBookedEvent {
     private CargoBookedEventData eventData;
 
+    public CargoBookedEvent() {
+    }
+
     public CargoBookedEvent(CargoBookedEventData eventData) {
         this.eventData = eventData;
     }
