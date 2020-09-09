@@ -1,6 +1,5 @@
-package com.nodamu.routingservice.adapters.out.persistence.jpaentities;
+package com.nodamu.routingservice.adapters.out.persistence.model.entities;
 
-import com.nodamu.routingservice.domain.entities.CarrierMovement;
 import com.nodamu.routingservice.domain.valueobjects.Schedule;
 import lombok.NoArgsConstructor;
 

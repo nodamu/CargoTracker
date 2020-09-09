@@ -1,7 +1,5 @@
-package com.nodamu.routingservice.adapters.out.persistence.jpaentities;
+package com.nodamu.routingservice.adapters.out.persistence.model.entities;
 
-import com.nodamu.routingservice.domain.valueobjects.Schedule;
-import com.nodamu.routingservice.domain.valueobjects.VoyageNumber;
 import lombok.Getter;
 
 import javax.persistence.*;

@@ -1,6 +1,5 @@
-package com.nodamu.routingservice.adapters.out.persistence.jpaentities;
+package com.nodamu.routingservice.adapters.out.persistence.model.entities;
 
-import com.nodamu.routingservice.domain.valueobjects.Location;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,11 +19,9 @@ public class CarrierMovementJpaEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
     @Column(name="arrival_date")
     private Date arrivalDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name="departure_Date")
     private Date departureDate;
 

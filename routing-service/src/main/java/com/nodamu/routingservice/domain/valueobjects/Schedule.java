@@ -13,11 +13,14 @@ import java.util.List;
  **/
 
 @NoArgsConstructor
-@AllArgsConstructor
 public class Schedule {
     public static final Schedule EMPTY = new Schedule();
 
     private List<CarrierMovement> carrierMovements = Collections.emptyList();
+
+    public Schedule(List<CarrierMovement> carrierMovements) {
+        this.carrierMovements = carrierMovements;
+    }
 
     public List<CarrierMovement> getCarrierMovements() {
         return Collections.unmodifiableList(carrierMovements);

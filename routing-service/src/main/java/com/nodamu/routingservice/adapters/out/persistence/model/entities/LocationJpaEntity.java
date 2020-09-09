@@ -1,4 +1,4 @@
-package com.nodamu.routingservice.adapters.out.persistence.jpaentities;
+package com.nodamu.routingservice.adapters.out.persistence.model.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
