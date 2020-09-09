@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface VoyageJpaRepository extends CrudRepository<VoyageJpaEntity,Long> {
 
-    @Query("SELECT v from VoyageJpaEntity v")
+    @Query("select v from VoyageJpaEntity v")
     List<VoyageJpaEntity> findAllVoyages();
 
 }
