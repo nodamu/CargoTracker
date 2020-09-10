@@ -51,13 +51,7 @@ public class Cargo  {
         this.delivery = Delivery.derivedFrom(getRouteSpecification(), getItinerary(),lastCargoHandledEvent);
     }
 
-    /**
-     * Method to register the event
-     * @param event
-     */
-//    public void addDomainEvent(Object event){
-//        registerEvent(event);
-//    }
+
 
 
 }

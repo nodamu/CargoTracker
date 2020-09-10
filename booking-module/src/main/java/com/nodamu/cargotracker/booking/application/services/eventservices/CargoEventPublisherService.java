@@ -35,13 +35,13 @@ public class CargoEventPublisherService {
 
     /**
      * TODO - Figure out why encapsulation causing deserialization errors
-     * @param cargoBookedEventData
+     * @param cargoBookedEvent
      */
     @TransactionalEventListener
-    public void handleCargoBookedEvent(CargoBookedEventData cargoBookedEventData){
-        Message<CargoBookedEventData> message = MessageBuilder.withPayload(cargoBookedEventData).build();
+    public void handleCargoBookedEvent(CargoBookedEvent cargoBookedEvent){
+        Message<CargoBookedEvent> message = MessageBuilder.withPayload(cargoBookedEvent).build();
        boolean result = cargoEventSource.cargoBooking().send(message);
-        logger.info("Publishing booked cargo event with ID -> {}, with result {}", cargoBookedEventData.getBookingId(),result);
+        logger.info("Publishing booked cargo event with ID -> {}, with result {}", cargoBookedEvent.getEventData().getBookingId(),result);
 
     }
 }

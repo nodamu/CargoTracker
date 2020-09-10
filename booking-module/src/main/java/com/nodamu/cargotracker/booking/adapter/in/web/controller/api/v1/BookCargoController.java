@@ -1,4 +1,4 @@
-package com.nodamu.cargotracker.booking.adapter.in.web.controller;
+package com.nodamu.cargotracker.booking.adapter.in.web.controller.api.v1;
 
 import com.nodamu.cargotracker.booking.adapter.in.web.model.dto.BookCargoResource;
 import com.nodamu.cargotracker.booking.adapter.in.web.model.mappers.BookCommandDtoAssembler;
@@ -10,19 +10,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author profnick
  * 9/3/20
  **/
 
-@Controller
-@RequestMapping("/cargobooking")
+@RestController
+@RequestMapping("/api/v1/cargobooking")
 public class BookCargoController {
 
-    @Autowired
     private BookCargoCommandService bookCargoCommandService;
 
+    public BookCargoController(BookCargoCommandService bookCargoCommandService) {
+        this.bookCargoCommandService = bookCargoCommandService;
+    }
 
     @PostMapping
     public ResponseEntity<BookingId> bookCargo(@RequestBody BookCargoResource bookCargoResource){
