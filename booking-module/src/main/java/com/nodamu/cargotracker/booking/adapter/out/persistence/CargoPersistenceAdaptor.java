@@ -80,5 +80,10 @@ public class CargoPersistenceAdaptor implements CargoRepository {
         cargoJpaRepository.save(CargoMapper.toCargoJpaEntity(cargo));
     }
 
+    @Override
+    public void saveRoutedBooking(Cargo cargo) {
+        cargoJpaRepository.save(CargoMapper.toCargoJpaEntityWithItinerary(cargo));
+    }
+
 
 }

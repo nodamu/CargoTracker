@@ -8,6 +8,8 @@ package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 import com.nodamu.cargotracker.booking.domain.entities.Location;
 import com.nodamu.cargotracker.booking.domain.valueobjects.Voyage;
 import com.sun.istack.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.*;
@@ -16,7 +18,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Leg")
-public class LegJpa {
+@Getter
+@Setter
+public class LegJpa  {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -45,7 +49,7 @@ public class LegJpa {
     private Date unloadTime;
 
 
-    protected LegJpa() {
+    public LegJpa() {
     }
 
     public LegJpa(VoyageJpa voyage, LocationJpa loadLocation,LocationJpa unloadLocation, Date loadTime, Date unloadTime){

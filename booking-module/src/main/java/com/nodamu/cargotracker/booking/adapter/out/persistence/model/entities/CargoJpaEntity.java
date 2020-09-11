@@ -66,6 +66,7 @@ public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
             this.bookingId = bookingId;
             this.bookingAmount = bookingAmount;
             this.origin = origin;
+            this.itinerary = CargoItineraryJpa.EMPTY_ITINERARY;
         }
 
         public CargoJpaEntityBuilder setRouteSpecification(RouteSpecificationJpa routeSpecification) {

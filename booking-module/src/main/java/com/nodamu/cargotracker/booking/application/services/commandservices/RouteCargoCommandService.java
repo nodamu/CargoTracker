@@ -1,5 +1,6 @@
 package com.nodamu.cargotracker.booking.application.services.commandservices;
 
+import com.nodamu.cargotracker.booking.adapter.out.persistence.repository.CargoJpaRepository;
 import com.nodamu.cargotracker.booking.application.ports.out.CargoRepository;
 import com.nodamu.cargotracker.booking.application.services.outboundservices.CargoRoutingService;
 import com.nodamu.cargotracker.booking.domain.aggregates.BookingId;
@@ -37,7 +38,7 @@ public class RouteCargoCommandService {
             CargoItinerary cargoItinerary = cargoRoutingService.fetchRouteForSpecification(cargo.get().getRouteSpecification());
             routeCargoCommand.setItinerary(cargoItinerary);
             cargo.get().assignToRoute(cargoItinerary);
-            cargoRepository.saveBooking(cargo.get());
+            cargoRepository.saveRoutedBooking(cargo.get());
         } else {
             throw new EntityNotFoundException();
         }
