@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/cargobooking")
 public class BookCargoController {
 
-    private BookCargoCommandService bookCargoCommandService;
+    private final BookCargoCommandService bookCargoCommandService;
 
     public BookCargoController(BookCargoCommandService bookCargoCommandService) {
         this.bookCargoCommandService = bookCargoCommandService;

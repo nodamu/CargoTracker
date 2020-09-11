@@ -1,5 +1,6 @@
 package com.nodamu.cargotracker.booking.domain.aggregates;
 
+import com.nodamu.cargotracker.booking.domain.commands.RouteCargoCommand;
 import com.nodamu.cargotracker.booking.domain.entities.Location;
 import com.nodamu.cargotracker.booking.domain.events.LastCargoHandledEvent;
 import com.nodamu.cargotracker.booking.domain.valueobjects.BookingAmount;
@@ -51,7 +52,17 @@ public class Cargo  {
         this.delivery = Delivery.derivedFrom(getRouteSpecification(), getItinerary(),lastCargoHandledEvent);
     }
 
+    /**
+     * Assign itinerary to cargo
+     *
+     * @param itinerary
+     */
+    public void assignToRoute(CargoItinerary itinerary){
+        this.itinerary = itinerary;
 
+        // Handling consistency within the Cargo aggregate synchronously
+        this.delivery = delivery.updateOnRouting(this.routeSpecification,this.itinerary);
+    }
 
 
 }
