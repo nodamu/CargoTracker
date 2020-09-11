@@ -44,6 +44,10 @@ public class Cargo  {
 
     }
 
+//    public void addDomainEvent(Object event){
+//        registerEvent(event);
+//    }
+
     /**
      * Derives delivery progress from lastCargoHandledEvent
      * @param lastCargoHandledEvent
@@ -62,6 +66,7 @@ public class Cargo  {
 
         // Handling consistency within the Cargo aggregate synchronously
         this.delivery = delivery.updateOnRouting(this.routeSpecification,this.itinerary);
+        // Throw a domain event
     }
 
 

@@ -13,7 +13,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.List;
 @EntityScan(basePackages = {"com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities"})  // scan JPA entities
 @EnableJpaRepositories
 @EnableBinding(CargoEventSource.class)
-public class BookingApplication  {
+public class BookingApplication {
 //    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -30,13 +32,10 @@ public class BookingApplication  {
         SpringApplication.run(BookingApplication.class, args);
     }
 
-//    @Override
-//    public void run(String... args) throws Exception {
 
-//
-//        service.bookCargo(command);
-//
-//        List<Cargo> cargos = cargoRepository.findAll();
-//        cargos.forEach(cargo -> logger.info( "-> {}",cargo.getId()));
-//    }
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
 }
