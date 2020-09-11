@@ -2,7 +2,6 @@ package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 
 
-
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEvent;
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEventData;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,19 +48,53 @@ public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    protected CargoJpaEntity() { }
+    public CargoJpaEntity() { }
 
-    public void setId(Long id) {
-        this.id = id;
+
+    /**
+     * Static builder pattern for constructing CargoJpaEntity
+     */
+    public static class CargoJpaEntityBuilder{
+        private BookingIdJpa bookingId;
+        private BookingAmountJpa bookingAmount;
+        private LocationJpa origin;
+        private RouteSpecificationJpa routeSpecification;
+        private CargoItineraryJpa itinerary;
+        private DeliveryJpa delivery;
+
+        public CargoJpaEntityBuilder(BookingIdJpa bookingId, BookingAmountJpa bookingAmount, LocationJpa origin) {
+            this.bookingId = bookingId;
+            this.bookingAmount = bookingAmount;
+            this.origin = origin;
+        }
+
+        public CargoJpaEntityBuilder setRouteSpecification(RouteSpecificationJpa routeSpecification) {
+            this.routeSpecification = routeSpecification;
+            return this;
+        }
+
+        public CargoJpaEntityBuilder setItinerary(CargoItineraryJpa itinerary) {
+            this.itinerary = itinerary;
+            return this;
+        }
+
+        public CargoJpaEntityBuilder setDelivery(DeliveryJpa delivery) {
+            this.delivery = delivery;
+            return this;
+        }
+
+        public CargoJpaEntity build(){
+            return new CargoJpaEntity(this);
+        }
     }
 
-    public CargoJpaEntity(BookingIdJpa bookingId, BookingAmountJpa bookingAmount, RouteSpecificationJpa routeSpecification, DeliveryJpa delivery) {
-        this.bookingId = bookingId;
-        this.bookingAmount = bookingAmount;
-        this.routeSpecification = routeSpecification;
+    public CargoJpaEntity(CargoJpaEntityBuilder builder) {
+        this.bookingId = builder.bookingId;
+        this.bookingAmount = builder.bookingAmount;
+        this.routeSpecification = builder.routeSpecification;
         this.origin = routeSpecification.getOrigin();
-        this.itinerary = CargoItineraryJpa.EMPTY_ITINERARY;
-        this.delivery = delivery;
+        this.itinerary = builder.itinerary;
+        this.delivery = builder.delivery;
 
         /**
          * Register cargo created event
@@ -69,7 +102,6 @@ public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
         addDomainEvent(new CargoBookedEvent(new CargoBookedEventData(bookingId.getId())));
 
     }
-
 
     public Long getId() {
         return id;
@@ -91,15 +123,10 @@ public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
         return routeSpecification;
     }
 
-    public void setBookingAmount(BookingAmountJpa bookingAmount) {
-        this.bookingAmount = bookingAmount;
-    }
-
-    public void setOrigin(LocationJpa origin) {
-        this.origin = origin;
-    }
 
     public void addDomainEvent(Object event){
         registerEvent(event);
     }
+
+
 }
