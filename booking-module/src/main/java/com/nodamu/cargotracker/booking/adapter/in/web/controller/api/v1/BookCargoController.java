@@ -4,6 +4,7 @@ import com.nodamu.cargotracker.booking.adapter.in.web.model.dto.BookCargoResourc
 import com.nodamu.cargotracker.booking.adapter.in.web.model.mappers.BookCommandDtoAssembler;
 import com.nodamu.cargotracker.booking.application.services.commandservices.BookCargoCommandService;
 import com.nodamu.cargotracker.booking.domain.aggregates.BookingId;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/cargobooking")
+@Api(value = "Cargo Booking Controller",  description = " Endpoints for booking cargo and finding cargo ", tags = "Cargo Booking Commands")
 public class BookCargoController {
 
     private final BookCargoCommandService bookCargoCommandService;
