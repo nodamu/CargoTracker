@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/cargobooking/routecargo")
 @Api(value = "Cargo Router Controller",  description = " Endpoints for Routing cargo  ", tags = "Cargo Routing Commands")
 public class RouteCargoController {
-    private RouteCargoCommandService cargoCommandService;
+
+    private final RouteCargoCommandService cargoCommandService;
 
     public RouteCargoController(RouteCargoCommandService cargoCommandService) {
         this.cargoCommandService = cargoCommandService;

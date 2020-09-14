@@ -14,5 +14,5 @@ public interface CargoRepository {
     List<BookingId> findAllBookingIds();
     List<Cargo> findAll();
     void saveBooking(Cargo cargo);
-    void saveRoutedBooking(Cargo cargo);
+    void saveRoutedBookingWithItinerary(Cargo cargo);
 }

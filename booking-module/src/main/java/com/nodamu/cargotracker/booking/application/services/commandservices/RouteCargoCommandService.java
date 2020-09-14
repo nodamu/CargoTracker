@@ -45,7 +45,7 @@ public class RouteCargoCommandService {
             CargoItinerary cargoItinerary = cargoRoutingService.fetchRouteForSpecification(cargo.get().getRouteSpecification());
             routeCargoCommand.setItinerary(cargoItinerary);
             cargo.get().assignToRoute(cargoItinerary);
-            cargoRepository.saveRoutedBooking(cargo.get());
+            cargoRepository.saveRoutedBookingWithItinerary(cargo.get());
         } else {
             throw new EntityNotFoundException();
         }

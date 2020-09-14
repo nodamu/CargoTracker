@@ -75,8 +75,12 @@ public class CargoPersistenceAdaptor implements CargoRepository {
     }
 
     @Override
-    public void saveRoutedBooking(Cargo cargo) {
+    public void saveRoutedBookingWithItinerary(Cargo cargo) {
        CargoJpaEntity cargoJpaEntity = cargoJpaRepository.findByBookingIdJpa(new BookingIdJpa(cargo.getId().getBookingId()));
+       cargoJpaEntity.setDelivery(DeliveryJpa.deriveFrom(cargo.getDelivery().getRoutingStatus(),
+               cargo.getDelivery().getTransportStatus(),
+               new LocationJpa(cargo.getDelivery().getLastKnownLocation().getUnLocCode()),
+               cargo.getDelivery().getLastCargoHandledEvent()));
        cargoJpaEntity.setItinerary(new CargoItineraryJpa((List<LegJpa>) cargo.getItinerary().getLegs()
                .stream()
                .map(leg -> new LegJpa(

@@ -67,8 +67,8 @@ public class CargoRoutingService implements RouteCargoUseCase {
     private Leg toLeg(TransitEdge edge) {
         return new Leg(
                 new Voyage(edge.getVoyageNumber()),
-                new Location(edge.getFromUnLocode()),
-                new Location(edge.getToUnLocode()),
+                new Location(edge.getFromUnLocCode()),
+                new Location(edge.getToUnLocCode()),
                 edge.getFromDate(),
                 edge.getToDate());
     }
