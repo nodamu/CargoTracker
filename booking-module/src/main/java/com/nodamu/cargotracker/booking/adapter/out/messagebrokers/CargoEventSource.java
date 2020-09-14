@@ -14,9 +14,12 @@ import org.springframework.messaging.MessageChannel;
  * Implementation is injected into service
  */
 public interface CargoEventSource {
-    String OUTPUT = "cargoBookingChannel";
+//    String OUTPUT = "cargoBookingChannel";
 
 
-    @Output(CargoEventSource.OUTPUT)
+    @Output("cargoBookingChannel")
     MessageChannel cargoBooking();
+
+    @Output("cargoRoutingChannel")
+    MessageChannel cargoRouting();
 }

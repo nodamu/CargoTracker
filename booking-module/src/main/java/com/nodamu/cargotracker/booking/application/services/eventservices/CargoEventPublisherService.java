@@ -3,6 +3,7 @@ package com.nodamu.cargotracker.booking.application.services.eventservices;
 import com.nodamu.cargotracker.booking.adapter.out.messagebrokers.CargoEventSource;
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEvent;
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEventData;
+import com.nodamu.cargotracker.shareddomain.events.CargoRoutedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,18 @@ public class CargoEventPublisherService {
         Message<CargoBookedEvent> message = MessageBuilder.withPayload(cargoBookedEvent).build();
        boolean result = cargoEventSource.cargoBooking().send(message);
         logger.info("Publishing booked cargo event with ID -> {}, with result {}", cargoBookedEvent.getEventData().getBookingId(),result);
+
+    }
+
+    /**
+     *
+     * @param cargoRoutedEvent
+     */
+    @TransactionalEventListener
+    public void handleCargoRoutedEvent(CargoRoutedEvent cargoRoutedEvent){
+        Message<CargoRoutedEvent> message = MessageBuilder.withPayload(cargoRoutedEvent).build();
+        boolean result = cargoEventSource.cargoRouting().send(message);
+        logger.info("Publishing routed cargo event with ID -> {}, with result {}", cargoRoutedEvent.getCargoRoutedEventData().getBookingId(),result);
 
     }
 }
