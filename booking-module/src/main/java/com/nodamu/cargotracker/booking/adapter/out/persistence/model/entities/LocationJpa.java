@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class LocationJpa {
 
-    @Column(name = "origin_id", insertable = false, updatable = false)
+    @Column(name = "origin_id")
     private String unLocCode;
 
     public LocationJpa() {

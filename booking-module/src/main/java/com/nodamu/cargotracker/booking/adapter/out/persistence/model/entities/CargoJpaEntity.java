@@ -4,6 +4,7 @@ package com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities;
 
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEvent;
 import com.nodamu.cargotracker.shareddomain.events.CargoBookedEventData;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.domain.AbstractAggregateRoot;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Cargo")
+@Setter
 public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
 
     @Id
@@ -68,6 +70,7 @@ public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
             this.origin = origin;
             this.itinerary = CargoItineraryJpa.EMPTY_ITINERARY;
         }
+
 
         public CargoJpaEntityBuilder setRouteSpecification(RouteSpecificationJpa routeSpecification) {
             this.routeSpecification = routeSpecification;
@@ -124,6 +127,9 @@ public class CargoJpaEntity  extends AbstractAggregateRoot <CargoJpaEntity> {
         return routeSpecification;
     }
 
+    public CargoItineraryJpa getItinerary() {
+        return itinerary;
+    }
 
     public void addDomainEvent(Object event){
         registerEvent(event);

@@ -1,7 +1,6 @@
 package com.nodamu.cargotracker.booking.adapter.out.persistence;
 
-import com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities.BookingIdJpa;
-import com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities.CargoJpaEntity;
+import com.nodamu.cargotracker.booking.adapter.out.persistence.model.entities.*;
 import com.nodamu.cargotracker.booking.adapter.out.persistence.model.mappers.CargoMapper;
 import com.nodamu.cargotracker.booking.adapter.out.persistence.repository.CargoJpaRepository;
 import com.nodamu.cargotracker.booking.application.ports.out.CargoRepository;
@@ -33,12 +32,7 @@ public class CargoPersistenceAdaptor implements CargoRepository {
     @Override
     public Cargo findByBookingId(BookingId id) {
         Optional<CargoJpaEntity> cargo = Optional.of(cargoJpaRepository.findByBookingIdJpa(CargoMapper.toJpaEntity(id)));
-        if(!cargo.isPresent()){
-//            TODO - Write custom exception class for not found
-            throw  new EntityNotFoundException();
-        }else{
-            return CargoMapper.mapToDomainEntity(cargo.get());
-        }
+        return CargoMapper.mapToDomainEntity(cargo.get());
     }
 
     /**
@@ -82,7 +76,17 @@ public class CargoPersistenceAdaptor implements CargoRepository {
 
     @Override
     public void saveRoutedBooking(Cargo cargo) {
-        cargoJpaRepository.save(CargoMapper.toCargoJpaEntityWithItinerary(cargo));
+       CargoJpaEntity cargoJpaEntity = cargoJpaRepository.findByBookingIdJpa(new BookingIdJpa(cargo.getId().getBookingId()));
+       cargoJpaEntity.setItinerary(new CargoItineraryJpa((List<LegJpa>) cargo.getItinerary().getLegs()
+               .stream()
+               .map(leg -> new LegJpa(
+                       new VoyageJpa(leg.getVoyageNumber().getVoyageNumber()),
+                       new LocationJpa(leg.getLoadLocation().getUnLocCode()),
+                       new LocationJpa(leg.getUnLoadLocation().getUnLocCode()),
+                       leg.getLoadTimeDate(),
+                       leg.getUnLoadTimeDate()))
+               .collect(Collectors.toList())));
+       cargoJpaRepository.save(cargoJpaEntity);
     }
 
 

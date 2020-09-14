@@ -29,9 +29,11 @@ public class DeliveryJpa {
 
     //Current/Previous information of the Cargo. Helps the operator in determining the current state is OK.
     @Column(name = "last_known_location_id")
+    @AttributeOverride(name = "unLocCode", column = @Column(name = "last_known_location_id"))
     private LocationJpa lastKnownLocation;
 
     @Column(name = "current_voyage_id")
+    @AttributeOverride(name = "voyageNumber", column = @Column(name = "current_voyage_number"))
     private VoyageJpa currentVoyage;
 
     @Embedded

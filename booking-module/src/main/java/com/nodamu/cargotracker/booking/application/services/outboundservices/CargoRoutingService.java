@@ -34,7 +34,7 @@ public class CargoRoutingService implements RouteCargoUseCase {
         /**
          * TODO - Setup Eureka Server
          */
-        String uri = "localhost:3500"; // Placeholder
+        String uri = "http://routing-service"; // Placeholder
 
         final String REST_URI= uri+"/api/v1/cargorouting/optimalRoute?origin={origin}&destination={destination}&deadline={deadline}";
 
@@ -42,6 +42,7 @@ public class CargoRoutingService implements RouteCargoUseCase {
                 routeSpecification.getDestination().getUnLocCode(),
                 routeSpecification.getArrivalDeadline().toString());
 
+        assert transitPath != null;
         return toCargoItinerary(transitPath);
     }
 

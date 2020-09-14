@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VoyageJpa {
 
-    @Column(name = "voyage_id", insertable = false, updatable = false)
+    @Column(name = "voyage_id")
     private String voyageNumber;
 
     public VoyageJpa(String voyageNumber) {
