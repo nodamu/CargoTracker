@@ -16,8 +16,8 @@ import java.sql.Date;
 public class TransitEdge {
 
     private String voyageNumber;
-    private String fromUnLocode;
-    private String toUnLocode;
+    private String fromUnLocCode;
+    private String toUnLocCode;
     private Date fromDate;
     private Date toDate;
 

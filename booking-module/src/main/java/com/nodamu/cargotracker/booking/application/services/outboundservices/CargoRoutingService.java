@@ -36,7 +36,7 @@ public class CargoRoutingService implements RouteCargoUseCase {
          */
         String uri = "http://routing-service"; // Placeholder
 
-        final String REST_URI= uri+"/api/v1/cargorouting/optimalRoute?origin={origin}&destination={destination}&deadline={deadline}";
+        final String REST_URI= uri+"/api/v1/cargorouting/route?origin={origin}&destination={destination}&deadline={deadline}";
 
         TransitPath transitPath =restTemplate.getForObject( REST_URI, TransitPath.class,  routeSpecification.getOrigin().getUnLocCode(),
                 routeSpecification.getDestination().getUnLocCode(),
