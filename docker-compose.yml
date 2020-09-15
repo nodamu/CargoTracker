@@ -4,6 +4,40 @@ services:
   booking-service:
     image: nickadamu/booking-service
     ports:
-    - "3500:3500"
-    - "8761:8761"
-    network_mode: "host"
+      - "3500:3500"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5762
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=bitnami
+      - EUREKA_PORT=8761
+    networks:
+      - cargo_tracker
+
+
+  rabbitmq:
+    image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
+    ports:
+      - '4369:4369'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    volumes:
+      - /media/profnick/e49241d2-2ff3-4f16-99ae-27d831082726/rabbitmq_data/:/bitnami
+    networks:
+      - cargo_tracker
+
+
+  eureka:
+    image: nickadamu/eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - cargo_tracker
+
+networks:
+  cargo_tracker:
+    driver: bridge
+  
+  
+

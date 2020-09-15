@@ -51,3 +51,7 @@ dependencyManagement {
 test {
     useJUnitPlatform()
 }
+
+bootBuildImage {
+	imageName = "nickadamu/routing-service"
+}
