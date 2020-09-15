@@ -1,4 +1,4 @@
-cd booking-module
+cd ../booking-module
 
 ./gradlew bootBuildImage
 
