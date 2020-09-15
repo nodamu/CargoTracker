@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  booking-service:
+    image: nickadamu/booking-service
+    ports:
+    - "3500:3500"
+    - "5672:5672"
+    - "8761:8761"
+    network_mode: "host"

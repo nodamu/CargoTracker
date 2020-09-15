@@ -70,3 +70,8 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
+
+bootBuildImage {
+	imageName = "nickadamu/booking-service"
+}
+
