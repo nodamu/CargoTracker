@@ -2,7 +2,7 @@ cd booking-module
 
 ./gradlew bootBuildImage
 
-cd routing-service
+cd ../routing-service
 
 ./gradlew bootBuildImage
 

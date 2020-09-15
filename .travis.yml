@@ -1,7 +1,10 @@
-language: java
-
 services:
   - docker
+
+before_install:
+  - cd booking-module && chmod +x gradlew
+  - cd routing-service && chmod +x gradlew
+
 
 deploy:
   provider: script
