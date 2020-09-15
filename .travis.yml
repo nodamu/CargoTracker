@@ -11,4 +11,4 @@ before_install:
 jobs:
   include:
     - stage: Docker build
-      script: bash docker_push.sh
+      script: sh docker_push.sh
