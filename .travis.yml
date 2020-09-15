@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - chmod +x docker_push.shs
+  - chmod +x docker_push.sh
   - cd booking-module && chmod +x gradlew
   - cd ../routing-service && chmod +x gradlew
 
