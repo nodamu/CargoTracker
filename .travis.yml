@@ -1,8 +1,10 @@
+language: java
+
 services:
   - docker
 
 deploy:
   provider: script
-  script: bash docker_push.sh
+  script: bash ./docker_push.sh
   on:
     branch: master
