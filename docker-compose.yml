@@ -9,6 +9,7 @@ services:
     depends_on:
       - eureka
       - rabbitmq
+      - routing-service
     environment:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5762
