@@ -3,8 +3,12 @@ version: "3"
 services:
   booking-service:
     image: nickadamu/booking-service
+    restart: always
     ports:
       - "3500:3500"
+    depends_on:
+      - eureka
+      - rabbitmq
     environment:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5762
@@ -17,6 +21,7 @@ services:
 
   rabbitmq:
     image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
+    container_name: rabbitmq
     ports:
       - '4369:4369'
       - '5672:5672'
@@ -27,9 +32,25 @@ services:
     networks:
       - cargo_tracker
 
+    
+  routing-service:
+    image: nickadamu/routing-service
+    restart: always
+    ports:
+      - "3501:3501"
+    environment:
+      - EUREKA_PORT=8761
+    depends_on:
+      - eureka
+      - rabbitmq
+    networks:
+      - cargo_tracker
+    
 
   eureka:
     image: nickadamu/eureka
+    container_name: eureka
+    restart: always
     ports:
       - "8761:8761"
     networks:
