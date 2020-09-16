@@ -12,7 +12,7 @@ services:
       - routing-service
     environment:
       - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5762
+      - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=bitnami
       - EUREKA_PORT=8761
@@ -61,5 +61,5 @@ networks:
   cargo_tracker:
     driver: bridge
   
-  
+
 
