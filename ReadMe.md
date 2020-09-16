@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/nodamu/CargoTracker.svg?branch=master)](https://travis-ci.com/nodamu/CargoTracker)
+
 ## Cargo Tracker project
 * Demo implementation of a cargo tracking application using Domain driven design principles
 
