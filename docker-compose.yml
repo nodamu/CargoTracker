@@ -19,7 +19,6 @@ services:
     networks:
       - cargo_tracker
 
-
   rabbitmq:
     image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
     container_name: rabbitmq
