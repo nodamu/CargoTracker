@@ -2,7 +2,7 @@ version: "3"
 
 services:
   booking-service:
-    image: nickadamu/booking-service
+    image: nickadamu/booking-service:latest
     restart: always
     ports:
       - "3500:3500"
@@ -34,7 +34,7 @@ services:
 
     
   routing-service:
-    image: nickadamu/routing-service
+    image: nickadamu/routing-service:latest
     restart: always
     ports:
       - "3501:3501"
