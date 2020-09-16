@@ -28,6 +28,6 @@ public class RouteCargoController {
     public ResponseEntity<String> routeCargo(@RequestBody RouteCargoResource resource){
         RouteCargoCommand command = new RouteCargoCommand(resource.getBookingId());
         cargoCommandService.routeCargo(command);
-        return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+        return ResponseEntity.ok("SUCCESS");
     }
 }
