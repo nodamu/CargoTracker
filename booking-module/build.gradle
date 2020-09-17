@@ -38,6 +38,7 @@ ext {
         implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 
 
         implementation 'io.springfox:springfox-swagger-ui:2.9.2'
