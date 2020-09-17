@@ -1,6 +1,5 @@
 package com.nodamu.cargotracker.booking.application.services.outboundservices;
 
-import com.nodamu.cargotracker.booking.domain.valueobjects.CargoItinerary;
 import com.nodamu.cargotracker.shareddomain.model.TransitPath;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
