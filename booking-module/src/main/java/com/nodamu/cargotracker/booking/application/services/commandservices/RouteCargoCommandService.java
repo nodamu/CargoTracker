@@ -40,30 +40,22 @@ public class RouteCargoCommandService {
      */
     @Transactional
     public void routeCargo(RouteCargoCommand routeCargoCommand){
+
        Optional<Cargo> cargo = Optional.ofNullable(cargoRepository.findByBookingId(new BookingId(routeCargoCommand.getCargoBookingId())));
+
         if(cargo.isPresent()){
             CargoItinerary cargoItinerary = cargoRoutingService.fetchRouteForSpecification(cargo.get().getRouteSpecification());
+           if(cargoItinerary.getLegs().size() != 0){
             routeCargoCommand.setItinerary(cargoItinerary);
             cargo.get().assignToRoute(cargoItinerary);
             cargoRepository.saveRoutedBookingWithItinerary(cargo.get());
+           }else {
+               throw new RuntimeException("Routing failed as routing service is not available");
+           }
         } else {
             throw new EntityNotFoundException();
         }
     }
-/**
-    public void routeCargoJpa(RouteCargoCommand routeCargoCommand){
-        Optional<CargoJpaEntity> cargo = Optional.ofNullable(cargoJpaRepository.findByBookingIdJpa(new BookingIdJpa(routeCargoCommand.getCargoBookingId())));
-        if(cargo.isPresent()){
-            CargoItinerary cargoItinerary = cargoRoutingService.fetchRouteForSpecification(
-                    new RouteSpecification(new Location(cargo.get().getRouteSpecification().getOrigin().getUnLocCode()),
-                    new Location(new Location(cargo.get().getRouteSpecification().getDestination().getUnLocCode())),
 
-                    );
-            routeCargoCommand.setItinerary(cargoItinerary);
-            cargo.get().assignToRoute(cargoItinerary);
-            cargoRepository.saveRoutedBooking(cargo.get());
-        } else {
-            throw new EntityNotFoundException();
-        }
-    }**/
+
 }

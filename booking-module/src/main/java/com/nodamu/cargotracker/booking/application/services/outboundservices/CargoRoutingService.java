@@ -1,5 +1,7 @@
 package com.nodamu.cargotracker.booking.application.services.outboundservices;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.nodamu.cargotracker.booking.application.ports.out.RouteCargoUseCase;
 import com.nodamu.cargotracker.booking.domain.entities.Location;
 import com.nodamu.cargotracker.booking.domain.valueobjects.CargoItinerary;
@@ -8,6 +10,8 @@ import com.nodamu.cargotracker.booking.domain.valueobjects.RouteSpecification;
 import com.nodamu.cargotracker.booking.domain.valueobjects.Voyage;
 import com.nodamu.cargotracker.shareddomain.model.TransitEdge;
 import com.nodamu.cargotracker.shareddomain.model.TransitPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +27,8 @@ import java.util.List;
 @Service
 public class CargoRoutingService implements RouteCargoUseCase {
 
+    private static final Logger logger = LoggerFactory.getLogger(CargoRoutingService.class);
+
     private final RestTemplate restTemplate;
 
     public CargoRoutingService(RestTemplate restTemplate) {
@@ -30,11 +36,10 @@ public class CargoRoutingService implements RouteCargoUseCase {
     }
 
     @Override
+    @HystrixCommand(fallbackMethod = "fetchRouteForSpecificationFallback", commandProperties = {@HystrixProperty(name="execution.timeout.enabled", value="false")})
     public CargoItinerary fetchRouteForSpecification(RouteSpecification routeSpecification) {
-        /**
-         * TODO - Setup Eureka Server
-         */
-        String uri = "http://routing-service"; // Placeholder
+
+        String uri = "http://routing-service";
 
         final String REST_URI= uri+"/api/v1/cargorouting/route?origin={origin}&destination={destination}&deadline={deadline}";
 
@@ -46,6 +51,11 @@ public class CargoRoutingService implements RouteCargoUseCase {
         return toCargoItinerary(transitPath);
     }
 
+    public CargoItinerary fetchRouteForSpecificationFallback(RouteSpecification routeSpecification){
+        logger.error("Fallback method for fetchRouteForSpecification is being called");
+        return toCargoItinerary(new TransitPath());
+    }
+
 
     /**
      * Anti-corruption layer conversion method from the routing service's domain model (TransitPath and TransitEdges)
@@ -55,7 +65,7 @@ public class CargoRoutingService implements RouteCargoUseCase {
      */
     private CargoItinerary toCargoItinerary(TransitPath transitPath) {
 
-        List<Leg> legs = new ArrayList<Leg>(transitPath.getTransitEdges().size());
+        List<Leg> legs = new ArrayList<>(transitPath.getTransitEdges().size());
         for (TransitEdge edge : transitPath.getTransitEdges()) {
             legs.add(toLeg(edge));
         }
