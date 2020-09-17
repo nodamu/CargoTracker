@@ -53,7 +53,7 @@ public class CargoRoutingService implements RouteCargoUseCase {
 
     public CargoItinerary fetchRouteForSpecificationFallback(RouteSpecification routeSpecification){
         logger.error("Fallback method for fetchRouteForSpecification is being called");
-        return toCargoItinerary(new TransitPath());
+        return new CargoItinerary();
     }
 
 

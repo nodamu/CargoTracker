@@ -12,7 +12,7 @@ import java.util.List;
  * 8/21/20
  **/
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class CargoItinerary {
     public static final CargoItinerary EMPTY_ITINERARY = new CargoItinerary();
     private List<Leg> legs = Collections.emptyList();
