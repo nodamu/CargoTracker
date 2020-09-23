@@ -12,7 +12,7 @@ before_install:
 jobs:
   include:
     - stage: Unit Test
-      script: sh ../run_test.sh
+      script: sh ../run_tests.sh
 
     - stage: Docker build
       script: sh ../docker_push.sh
