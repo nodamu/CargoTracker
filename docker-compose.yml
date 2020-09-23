@@ -9,13 +9,14 @@ services:
     depends_on:
       - eureka
       - rabbitmq
-      # - routing-service
+      - routing-service
     environment:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=bitnami
       - EUREKA_PORT=8761
+      - eureka.instance.name=eureka
     networks:
       - cargo_tracker
 
@@ -33,18 +34,19 @@ services:
       - cargo_tracker
 
     
-  # routing-service:
-  #   image: nickadamu/routing-service:latest
-  #   restart: always
-  #   ports:
-  #     - "3501:3501"
-  #   environment:
-  #     - EUREKA_PORT=8761
-  #   depends_on:
-  #     - eureka
-  #     - rabbitmq
-  #   networks:
-  #     - cargo_tracker
+  routing-service:
+    image: nickadamu/routing-service:latest
+    restart: always
+    ports:
+      - "3501:3501"
+    environment:
+      - EUREKA_PORT=8761
+      - eureka.instance.name=eureka
+    depends_on:
+      - eureka
+      - rabbitmq
+    networks:
+      - cargo_tracker
     
 
   eureka:
