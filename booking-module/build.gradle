@@ -2,6 +2,8 @@ plugins {
     id 'org.springframework.boot' version '2.3.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
+    id 'com.google.cloud.tools.jib' version '2.5.0'
+
 }
 
 group = 'com.nodamu.cargotracker'
@@ -78,4 +80,6 @@ dependencyManagement {
 bootBuildImage {
 	imageName = "nickadamu/booking-service"
 }
+
+jib.to.image = "nickadamu/booking-service"
 
