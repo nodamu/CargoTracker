@@ -4,12 +4,15 @@ services:
   - docker
 
 before_install:
-  - chmod +x docker_push.sh
+  - chmod +x docker_push.sh && chmod +x run_tests.sh 
   - cd booking-module && chmod +x gradlew
   - cd ../routing-service && chmod +x gradlew
 
 
 jobs:
   include:
+    - stage: Unit Test
+      script: sh ../run_test.sh
+
     - stage: Docker build
       script: sh ../docker_push.sh
