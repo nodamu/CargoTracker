@@ -62,3 +62,4 @@ jib{
         tags = [commitId, 'latest']
     }
 
+}
