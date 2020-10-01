@@ -77,9 +77,12 @@ dependencyManagement {
     }
 }
 
-bootBuildImage {
-	imageName = "nickadamu/booking-service"
+
+def commitId = 'git rev-parse --verify HEAD'.execute().text.trim()
+
+jib{
+    to {
+        image = "nickadamu/booking-service"
+        tags = [commitId, 'latest']
+    }
 }
-
-jib.to.image = "nickadamu/booking-service"
-

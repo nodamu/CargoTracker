@@ -53,8 +53,12 @@ test {
     useJUnitPlatform()
 }
 
-bootBuildImage {
-	imageName = "nickadamu/routing-service"
-}
-jib.to.image = "nickadamu/routing-service"
+
+def commitId = 'git rev-parse --verify HEAD'.execute().text.trim()
+
+jib{
+    to {
+        image = "nickadamu/routing-service"
+        tags = [commitId, 'latest']
+    }
 
